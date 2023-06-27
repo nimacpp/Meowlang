@@ -2,7 +2,7 @@
 Meow language for fun
 # install 
 ```
-g++ - std=c++11 Meow.cpp -o Meow
+g++ -std=c++11 Meow.cpp -o Meow
 
 ```
 # how to use
