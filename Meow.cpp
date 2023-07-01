@@ -1,94 +1,56 @@
-#include <iostream>
-#include <regex>
-#include <string>
-#include <map>
-#include <cstdlib>
-#include <unistd.h>
-#include <fstream>
-#include <stdlib.h>
-#include <dirent.h>
-#include <sys/types.h>
+#include "Meow.h"
 
 using namespace std;
-string letters = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/*-+";
 
-vector<string> split(string s, string delimiter)
-{
-
-    size_t pos_start = 0, pos_end, delim_len = delimiter.length();
-    string token;
-    vector<string> res;
-    while ((pos_end = s.find(delimiter, pos_start)) != string::npos)
-    {
-        token = s.substr(pos_start, pos_end - pos_start);
-        pos_start = pos_end + delim_len;
-        res.push_back(token);
-    }
-
-    res.push_back(s.substr(pos_start));
-    return res;
-}
-string readfile(string name)
-	{
-    ifstream file(name.c_str());
-    if(name.substr(name.find_last_of(".")+1) == "Meow") {
-
-    if(!file){
-    	cout<<name<<": No such file or directory "<<endl;
-    	return "";
-    }else{
-    string line;
-    string all = "";
-    vector<string> rf;
-    while (getline(file, line))
-    {
-        all = all + line;
-
-    }
-    return all;
-}
-}
-else
-	cout<<name<<": The file format must be .Meow"<<endl;
-	return "";
-
-}
-void help(){
-	cout<<"First, We write the required number of 'Meow'.\nAfter finishing a comma,"
-	"we put it at the end and\ndo it many times so that we can create a sentence or word with it.\n"
-	"[!] The list of Meows at the end \n"
-	"[word] -> Number of repetitions "<<endl;
-	for(int i=0;i<letters.length();i++){
-		if(i%4==0){
-			cout<<endl;
-		}
-		cout<<"["<<letters[i]<<"] -> "<<i+1<<"\t";
-	}
-}
-
-string translate(string text){
-	string rtn = "";int no; 
-	for(auto a : split(text,",")){
-
-		no = split(a,"Meow").size()-2;
-
-		rtn = rtn+letters[no];
-
-	}
- return rtn;
-}
+//vector<string> setting;
 
 int main(int argc, char const *argv[])
 {
-	if(!argv[1]){
-		cout<<"try 'Meow --help' for more information"<<endl;
-	}else{
-		string rg = argv[1];
-		if(rg == "--help"){
+	string ag ;
+	for(int i=1;i< argc;i++){
+		//cout<<"|"<<argv[i]<<"|"<<endl;
+		ag = argv[i];
+		if((ag == "-h")||(ag == "--help")){
+			cout<<"usage: Meow <operation> [...]\n"
+				  "operations:\n"
+				  "\tMeow {-h --help}\n"
+				  "\tMeow {-v --version}\n"
+				  "\tMeow {-l --list}\n"
+				  "\tMeow {-d --decode}  [file]\n"
+				  "\tMeow {-e --encode}  [file]\n"
+				  "use 'Meow {-h --help}' with an operation for available options\n"
+				  <<endl;
+			//setting.insert("help");
+		}else if((ag == "-d")||(ag == "--decode")){
+			 string file = argv[i+1];
+			 i++;
+			 cout<<decode(readfile(file))<<endl;
+		}else if((ag == "-e")||(ag == "--encode")){
+			 string file = argv[i+1];
+			 i++;
+			 cout<<encode(readfile(file))<<endl;
+		}else if((ag == "-v")||(ag == "--version")){
+			cout<<
+"       _                        \n"
+"       \\`*-.                   Meowlang v1.2.1 - c++ v.11 \n"
+"        )  _`-.                copyright (C) 2023 Nimacpp(nioxteam) \n"
+"       .  : `. .               it's the Meow lang and the only reason\n"
+"       : _   '  \\              to make it is to bring a smile to your\n"
+"       `-.-'          `-.      face .\n"
+"         ;       `       `.     \n"
+"         :.       .        \\    \n"
+"         . \\  .   :   .-'   .   \n"
+"         '  `+.;  ;  '      :   \n"
+"         :  '  |    ;       ;-.    github.com/Nimacpp/Meowlang\n"
+"         ; '   : :`-:     _.`* ;   Inventor: Nimacpp    \n"
+"[bug] .*' /  .*' ; .*`- +'  `*' \n"
+"      `*-*   `*-*  `*-*'\n";
+
+		}else if((ag == "-l")||(ag == "-list")){
 			help();
-		}else if(rg == "-f"){
-			string file = argv[2];
-			cout<<translate(readfile(file));
+
+		}else{
+			cout<<"error: invalid option '"<<ag<<"'"<<endl;
 		}
 	}
 	return 0;
