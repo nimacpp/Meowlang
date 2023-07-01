@@ -14,6 +14,7 @@ g++ Meow.cpp -o Meow
 ./Meow -v
 ```
 # usage
+```
 usage: Meow <operation> [...]
 operations:
         Meow {-h --help}
@@ -22,7 +23,7 @@ operations:
         Meow {-d --decode}  [file]
         Meow {-e --encode}  [file]
 use 'Meow {-h --help}' with an operation for available options
-
+```
 # learn 
 First, We write the required number of 'Meow'.
 After finishing a comma,we put it at the end and
@@ -30,7 +31,7 @@ do it many times so that we can create a sentence or word with it.
 [!] The list of Meows at the end
 
 [word] -> Number of repetitions
-
+```
 [a] -> 1        [b] -> 2        [c] -> 3        [d] -> 4
 [e] -> 5        [f] -> 6        [g] -> 7        [h] -> 8
 [i] -> 9        [j] -> 10       [k] -> 11       [l] -> 12
@@ -48,3 +49,4 @@ do it many times so that we can create a sentence or word with it.
 [3] -> 57       [4] -> 58       [5] -> 59       [6] -> 60
 [7] -> 61       [8] -> 62       [9] -> 63       [/] -> 64
 [*] -> 65       [-] -> 66       [+] -> 67
+```
